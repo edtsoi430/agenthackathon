@@ -1,19 +1,18 @@
-// Form.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormContext } from './FormContext';
 
 const interestOptions = [
-  "Sports & Fitness",
-  "Finance and Investing",
-  "Music Entertainment",
-  "Movies",
-  "Travelling",
-  "Information Technology",
-  "Fashion Enthusiasts",
-  "Cooking",
-  "Gardening",
-  "Law"
+  "Environmental Protection",
+  "Healthcare Reform",
+  "Education Funding",
+  "Tax Policy",
+  "Immigration Reform",
+  "Climate Change",
+  "Infrastructure",
+  "National Security",
+  "Social Welfare",
+  "Economic Policy"
 ];
 
 const Form = () => {
@@ -42,6 +41,7 @@ const Form = () => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
+      <h2>Personalize Your Legislative Experience</h2>
       <div className="form-group">
         <label htmlFor="name">Name:</label>
         <input
@@ -65,17 +65,18 @@ const Form = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
+        <label htmlFor="occupation">Occupation:</label>
+        <input
+          type="text"
+          id="occupation"
+          name="occupation"
+          value={formData.occupation}
           onChange={handleChange}
           required
         />
       </div>
       <div className="form-group">
-        <label>Interests:</label>
+        <label>Legislative Interests:</label>
         <div className="checkbox-group">
           {interestOptions.map((interest) => (
             <div key={interest} className="checkbox-item">
@@ -90,29 +91,9 @@ const Form = () => {
               <label htmlFor={interest}>{interest}</label>
             </div>
           ))}
-          <div className="checkbox-item">
-            <input
-              type="checkbox"
-              id="other"
-              name="interests"
-              value="Other"
-              checked={formData.interests.includes("Other")}
-              onChange={handleInterestChange}
-            />
-            <label htmlFor="other">Other</label>
-            {formData.interests.includes("Other") && (
-              <input
-                type="text"
-                name="otherInterest"
-                value={formData.otherInterest}
-                onChange={handleChange}
-                placeholder="Please specify"
-              />
-            )}
-          </div>
         </div>
       </div>
-      <button type="submit" className="submit-btn">Submit</button>
+      <button type="submit" className="submit-btn">Get Personalized Articles</button>
     </form>
   );
 };
