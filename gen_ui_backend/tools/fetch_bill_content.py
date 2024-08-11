@@ -2,8 +2,10 @@ from langchain_community.document_loaders import FireCrawlLoader
 import os
 import json
 
-# Read the /Users/apple/Development/LawGuru/legislative-guru/gen_ui_backend/tools/bills.json,
-# retrieves the corresponding URLs from the IDs
+# Construct the path relative to the project root
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+json_file_path = os.path.join(project_root, "tools", "bills.json")
+
 def get_urls_from_ids(ids):
     # Load the JSON data from the file
     with open(json_file_path, 'r') as f:
@@ -46,7 +48,6 @@ def extract_website_data(urls):
     
     return results
 
-json_file_path = "/Users/apple/Development/LawGuru/legislative-guru/gen_ui_backend/tools/bills.json"
 example_ids = ["1636377", "1636504"]
 urls = get_urls_from_ids(example_ids)
 data = extract_website_data(urls)
