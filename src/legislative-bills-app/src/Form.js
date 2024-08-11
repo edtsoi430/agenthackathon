@@ -1,6 +1,7 @@
 // Form.js
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormContext } from './FormContext';
 
 const interestOptions = [
   "Sports & Fitness",
@@ -16,38 +17,25 @@ const interestOptions = [
 ];
 
 const Form = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    description: '',
-    interests: [],
-    otherInterest: ''
-  });
-
+  const { formData, updateFormData } = useFormContext();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    updateFormData({ [name]: value });
   };
 
   const handleInterestChange = (e) => {
     const { value, checked } = e.target;
-    setFormData((prevData) => {
-      if (checked) {
-        return { ...prevData, interests: [...prevData.interests, value] };
-      } else {
-        return { ...prevData, interests: prevData.interests.filter(interest => interest !== value) };
-      }
+    updateFormData({
+      interests: checked
+        ? [...formData.interests, value]
+        : formData.interests.filter(interest => interest !== value)
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to a server
     console.log('Form submitted:', formData);
     navigate('/articles');
   };
